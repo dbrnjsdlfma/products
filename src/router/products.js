@@ -18,7 +18,7 @@ router.get('/:id', isAuth, expressAsyncHandler( async (req, res, next) => { // /
     const product = await Product.findOne({
         user : req.user._id ,
         _id : req.params.id ,
-    })
+    }).populate('user')
     if(!product) {
         res.status(404).json({ code : 404 , message : 'Product Not Found'})
     } else {
@@ -59,7 +59,7 @@ router.put('/:id', isAuth , expressAsyncHandler( async (req, res, next) => { // 
     const product = await Product.findOne({
         user : req.user._id ,
         _id : req.params.id ,
-    })
+    }).populate('user')
     console.log(product)
     if(!product) {
         res.status(404).json({ code : 404 , message : 'Product Not Found'})
